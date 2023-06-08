@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "StatsGlobales";
+}
+
+<h2>StatsGlobales</h2>
+

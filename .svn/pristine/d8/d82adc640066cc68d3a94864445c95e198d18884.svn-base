@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "Valeur";
+}
+
+<h2>Valeur</h2>
+

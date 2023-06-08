@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "ModifierProfilUtilisateur";
+}
+
+<h2>ModifierProfilUtilisateur</h2>
+

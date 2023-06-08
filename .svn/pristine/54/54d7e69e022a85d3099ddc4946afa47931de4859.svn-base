@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "ListeEntreprises";
+}
+
+<!--FORMULAIRE -->
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <br />
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des Entreprises :  </h4>
+                        <br />
+                        <div class="table-responsive">
+                            <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr class="colone-titre">
+                                        <th class="hidden"></th>
+                                        <th>Prénom</th>
+                                        <th>Nom</th>
+                                        <th>Login</th>
+                                        <th>Profil</th>
+                                        <th>Etat</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td class="hidden"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                
+                            <br />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+

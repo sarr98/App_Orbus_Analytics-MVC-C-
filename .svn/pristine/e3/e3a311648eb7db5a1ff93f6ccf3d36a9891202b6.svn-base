@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using AppOrbusAnalytics.Models;
+
+namespace AppOrbusAnalytics.Controllers
+{
+    public class ConnexionController : Controller
+    {
+        // GET: Connexion
+
+        public ActionResult Login()
+        {
+            return View(new ModelConnexion());
+        }
+
+        [HttpPost]
+        public ActionResult Login(ModelConnexion modelConnexion)
+        {
+
+            if(ModelState.IsValid)
+            {
+
+                Session["PROFILAGENT"] = "Administrateur";  //Administrateur
+                Session["PRENOMAGENT"] = "Frater";
+                Session["NOMAGENT"] = "DJOSSOU";
+                Session["NOMPOLE"] = "Nom pole";
+
+
+                return RedirectToAction("Accueil", "Statistique");
+            }
+
+            return View(modelConnexion);
+        }
+
+
+
+
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+    }
+} 

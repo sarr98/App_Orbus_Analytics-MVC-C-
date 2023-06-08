@@ -1,0 +1,349 @@
+﻿@model List<AppOrbusAnalytics.Models.ResultatStatGlobalQuantite>
+
+@{
+    ViewBag.Title = "StatsGlobalesQuantite";
+}
+<!--Pop Up produit-dialog Start -->
+<div class="modal fade" id="produit-dialog" tabindex="-1" role="dialog" aria-labelledby="produit-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Produit</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code Tarifaire" id="txtCodeProduit" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Description" id="txtDesignation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse;" id="produitTable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Désignation</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" id="btnProdValider1" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Pop Up produit-dialog End  -->
+<!--Pop Up pays-dialog Start  -->
+<div class="modal fade" id="pays-dialog" tabindex="-1" role="dialog" aria-labelledby="pays-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <input type="hidden" id="txtTypePays" />
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Pays</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code" id="txtCodePays" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nom" id="txtNomPays" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse; max-width: 490px">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Nom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Pop Up pays-dialog End  -->
+<!--Pop Up beneficiaire-dialog Start  -->
+<div class="modal fade" id="beneficiaire-dialog" tabindex="-1" role="dialog" aria-labelledby="beneficiaire-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Client</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code PPM" id="txtCodePPM" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Raison Sociale" id="txtNomBeneficiare" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>PPM</th>
+                                <th>Bénéficiaire</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Pop Up beneficiaire-dialog End  -->
+<!--FORMULAIRE -->
+
+@using (Html.BeginForm("StatsGlobalesQuantite", "Statistique", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div id="errorMessage" class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="card">
+                        <div class="card-header  card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">search</i>
+                            </div>
+                            <h3 class="card-title f1" style="text-align: center"><b>Statistiques Globales par Quantité</b></h3>
+                            <h4 class="card-title f1"><b>Formulaire de Recherche</b></h4>
+                        </div>
+                        <br />
+
+                        <!-- Debut ligne 2  -->
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select id="Drop_Operation_Rech" class="selectpicker taille " data-style="select-with-transition" title="Nature Opération" data-size="10" runat="server">
+                                            <option value="-1">Nature Opération</option>
+                                            <option value="1">Importation</option>
+                                            <option value="2">Exportation</option>
+                                            <option value="3">Transit</option>
+                                            <option value="4">Réexportation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Produit", null, new { @class = "form-control", @placeholder = "Produit", data_toggle = "modal", data_target = "#produit-dialog", @required = "required" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Pays Provenance", null, new { @class = "form-control", @placeholder = "Pays Provenance", data_toggle = "modal", data_target = "#pays-dialog" })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select id="DateParList" class="selectpicker taille " data-style="select-with-transition" title="Date Par" data-size="10" runat="server">
+                                            <option value="1">Mois</option>
+                                            <option value="2">Année</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("DebutPeriode", null, new { @class = "form-control", @placeholder = "Début", @type = "date", @required = "required" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Pays Origine", null, new { @class = "form-control", @placeholder = "Pays Origine", data_toggle = "modal", data_target = "#pays-dialog" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select id="DeviseList" class="selectpicker taille " data-style="select-with-transition" title="Devise" data-size="10" runat="server" datatextfield="NOMDEVISE" datavaluefield="CODEDEVISE">
+                                            <%--
+                                            <option value="-1"></option>--%>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("FinPeriode", null, new { @class = "form-control", @placeholder = "Fin", @type = "date", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Beneficiaire", null, new { @class = "form-control", @placeholder = "Beneficiaire", data_toggle = "modal", data_target = "#beneficiaire-dialog" })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <br />
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button class="btn btn-fill btn-rose" type="submit" formaction="@Url.Action("StatsGlobalesQuantite", "Statistique")" formmethod="post"
+                                        id="btnRechercher" name="RechercherButton">
+                                    Rechercher
+                                </button>
+                                <input class="btn btn-fill btn-warning" type="button" onclick="VisualiserExcel_Click()" value="Exporter sous excel" />
+                                <input class="btn btn-fill form-btn" type="button" onclick="Annuler_Click()" value="Annuler" />
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (IsPost && Model != null && Request.Form["RechercherButton"] != null)
+    {
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <br />
+                            <br />
+                            <div class="card-body">
+                                <div>
+                                    <h5 class="card-title">Total Orbus :</h5>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <table id="" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                        <thead>
+                                            <tr class="colone-titre">
+                                                <th><strong>Opération</strong></th>
+                                                <th><strong>Produit</strong></th>
+                                                <th><strong>Quantité</strong></th>
+                                                <th><strong>Mesure</strong></th>
+                                                @foreach (var mois in ViewBag.MoisUniques)
+                                                {
+                                                    <th>@mois</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var resultatGroupe in (List<AppOrbusAnalytics.Models.ResultatStatGlobalQuantite>)ViewBag.ResultatsGroupes)
+                                            {
+                                                <tr>
+                                                    <td>@resultatGroupe.Operation</td>
+                                                    <td>@resultatGroupe.DescProduit</td>
+                                                    <td>@resultatGroupe.Quantite</td>
+                                                    <td>@resultatGroupe.Mesure</td>
+                                                    @foreach (var mois in ViewBag.MoisUniques)
+                                                    {
+                                                        <td>@resultatGroupe.ValeursMois[mois]</td>
+                                                    }
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <br />
+                            </div>
+                            <div>
+                                <br />
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+}
+@section scripts
+    {
+    <script>
+        // Fonction pour masquer le message d'erreur après 10 secondes
+        setTimeout(function () {
+            var errorMessage = document.getElementById("errorMessage");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }, 5000);
+    </script>
+    <script src="@Url.Content("~/Scripts/produit-dialog.js")"></script>
+    <script type="text/javascript">
+
+
+    </script>
+}

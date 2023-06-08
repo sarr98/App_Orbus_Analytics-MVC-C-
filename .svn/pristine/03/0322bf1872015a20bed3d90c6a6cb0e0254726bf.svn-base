@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="APPLICATIONSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANA_ENTREPRISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOrbus" Type="varchar" MaxLength="5" />
+          <Property Name="NomouRaisonSociale" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="255" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="TypeEntreprise" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="1" />
+          <Property Name="DateInscription" Type="date" />
+          <Property Name="DateExpiration" Type="date" />
+          <Property Name="LibelleTypeEntreprise" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ANA_UTILISATEURS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userLogin" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Profil" Type="varchar" MaxLength="20" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="IdEntreprise" Type="int" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="1" />
+          <Property Name="DateCreation" Type="date" Nullable="false" />
+          <Property Name="Signature" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityContainer Name="APPLICATIONSModelStoreContainer">
+          <EntitySet Name="ANA_ENTREPRISES" EntityType="Self.ANA_ENTREPRISES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANA_UTILISATEURS" EntityType="Self.ANA_UTILISATEURS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APPLICATIONSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANA_ENTREPRISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOrbus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NomouRaisonSociale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="TypeEntreprise" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Etat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DateInscription" Type="DateTime" Precision="0" />
+          <Property Name="DateExpiration" Type="DateTime" Precision="0" />
+          <Property Name="LibelleTypeEntreprise" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ANA_UTILISATEURS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Profil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="IdEntreprise" Type="Int32" Nullable="false" />
+          <Property Name="Etat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Signature" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="APPLICATIONSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANA_ENTREPRISES" EntityType="Self.ANA_ENTREPRISES" />
+          <EntitySet Name="ANA_UTILISATEURS" EntityType="Self.ANA_UTILISATEURS" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APPLICATIONSModelStoreContainer" CdmEntityContainer="APPLICATIONSEntities">
+          <EntitySetMapping Name="ANA_ENTREPRISES">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.ANA_ENTREPRISES">
+              <MappingFragment StoreEntitySet="ANA_ENTREPRISES">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdOrbus" ColumnName="IdOrbus" />
+                <ScalarProperty Name="NomouRaisonSociale" ColumnName="NomouRaisonSociale" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="TypeEntreprise" ColumnName="TypeEntreprise" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="DateInscription" ColumnName="DateInscription" />
+                <ScalarProperty Name="DateExpiration" ColumnName="DateExpiration" />
+                <ScalarProperty Name="LibelleTypeEntreprise" ColumnName="LibelleTypeEntreprise" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANA_UTILISATEURS">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.ANA_UTILISATEURS">
+              <MappingFragment StoreEntitySet="ANA_UTILISATEURS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userLogin" ColumnName="userLogin" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Profil" ColumnName="Profil" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="IdEntreprise" ColumnName="IdEntreprise" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

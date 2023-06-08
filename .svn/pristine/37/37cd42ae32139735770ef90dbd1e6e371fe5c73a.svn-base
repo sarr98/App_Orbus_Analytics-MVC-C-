@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "ListeUtilisateurs";
+}
+<script>
+    function fermerPopup() {
+        $('#utilisateur-dialog').modal('hide');
+    }
+</script>
+<!--Pop Up utilisateurs-dialog Start  -->
+<div class="modal fade" id="utilisateur-dialog" style="overflow:hidden;" role="dialog" aria-labelledby="utilisateur-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="display: flex; flex-direction: column; text-align: center;">
+                        <h3><b>Nouvel utilisateur</b></h3>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Prénom" id="txtPrenom" name="Prenom" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nom" id="txtNom" name="Nom" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" id="txtEmail" name="Email" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Login" id="txtLogin" name="Login" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Téléphone" id="txtTelephone" name="Telephone" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" placeholder="Date Inscription" id="txtDateInscription" name="DateInscription" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Agent">Profil</label>
+                                        <input type="radio" id="txtProfil1" name="Profil" value="1" checked="checked" />&nbsp;Agent&nbsp;
+                                        <input type="radio" id="txtProfil2" name="Profil" value="2" style="margin-left: 15px;" />&nbsp;Superviseur
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <input type="submit" id="btnAjouter" class="btn btn-fill btn-rose mr-2" value="Valider" />
+                        <button type="button" class="btn btn-danger " data-dismiss="modal" onclick="fermerPopup()">Fermer</button>
+                        <br />
+                        <span style="color: red" id="labelErrorMsg"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Pop Up utilisateurs-dialog End  -->
+<!--FORMULAIRE -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <br />
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des utilisateurs :  </h4>
+                        <br />
+                        <div class="table-responsive">
+                            <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr class="colone-titre">
+                                        <th class="hidden"></th>
+                                        <th>User Login</th>
+                                        <th>Prénom</th>
+                                        <th>Nom</th>
+                                        <th>Email</th>
+                                        <th>Profil</th>
+                                        <th>Telephone</th>
+                                        <th>Date de Creation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var utilisateur in Model)
+                                     {
+
+                                    <tr>
+                                        <td class="hidden"></td>
+                                        <td>@utilisateur.userLogin</td>
+                                        <td>@utilisateur.Prenom</td>
+                                        <td>@utilisateur.Nom</td>
+                                        <td>@utilisateur.Email</td>
+                                        <td>@utilisateur.Profil</td>
+                                        <td>@utilisateur.Telephone</td>
+                                        <td>@utilisateur.DateCreation</td>
+
+                                    </tr>
+                                     }
+                                    </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button type="button" class="btn btn-fill btn-rose" data-toggle="modal" data-target="#utilisateur-dialog">Nouvel Utilisateur</button>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

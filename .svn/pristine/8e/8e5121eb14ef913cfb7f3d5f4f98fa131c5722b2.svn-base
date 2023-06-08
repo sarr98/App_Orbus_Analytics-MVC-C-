@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="APPLICATIONSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANA_ENTREPRISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdOrbus" Type="varchar" MaxLength="5" />
+          <Property Name="NomouRaisonSociale" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Adresse" Type="varchar" MaxLength="255" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="TypeEntreprise" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="1" />
+          <Property Name="DateInscription" Type="date" />
+          <Property Name="DateExpiration" Type="date" />
+          <Property Name="LibelleTypeEntreprise" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ANA_UTILISATEURS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userLogin" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Profil" Type="varchar" MaxLength="20" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="IdEntreprise" Type="int" Nullable="false" />
+          <Property Name="Etat" Type="varchar" MaxLength="1" />
+          <Property Name="DateCreation" Type="date" Nullable="false" />
+          <Property Name="Signature" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="IDCLIENT" />
+          </Key>
+          <Property Name="IDCLIENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMOURAISONSOCIALEBENEFICIAIRE" Type="varchar" MaxLength="80" />
+          <Property Name="FONCTIONBENEFICIAIRE" Type="varchar" MaxLength="80" />
+          <Property Name="PROFESSIONBENEFICIAIRE" Type="varchar" MaxLength="35" />
+          <Property Name="ADRESSEBENEFICIAIRE" Type="varchar" MaxLength="200" />
+          <Property Name="TELEPHONEBENEFICIAIRE" Type="varchar" MaxLength="30" />
+          <Property Name="FAXBENEFICIAIRE" Type="varchar" MaxLength="30" />
+          <Property Name="EMAILBENEFICIAIRE" Type="varchar" MaxLength="35" />
+          <Property Name="VILLEETATZIPBENEFICIAIRE" Type="varchar" MaxLength="35" />
+          <Property Name="PAYSBENEFICIAIRE" Type="varchar" MaxLength="35" />
+          <Property Name="NUMERONINEA" Type="varchar" MaxLength="15" />
+          <Property Name="NUMEROCQIE" Type="varchar" MaxLength="15" />
+          <Property Name="NUMEROCC" Type="varchar" MaxLength="15" />
+          <Property Name="NUMERORC" Type="varchar" MaxLength="15" />
+          <Property Name="BENEFICIAIRE" Type="varchar" MaxLength="15" />
+          <Property Name="CODEPPM" Type="varchar" MaxLength="50" />
+          <Property Name="DATEAJOUT" Type="datetime" />
+          <Property Name="USERCREATEDDATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DEVISE">
+          <Key>
+            <PropertyRef Name="CODEDEVISE" />
+          </Key>
+          <Property Name="CODEDEVISE" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="NOMDEVISE" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="TAUXDEVISE" Type="float" />
+          <Property Name="TAUXDEVISE1" Type="float" />
+        </EntityType>
+        <EntityType Name="OPERATEUR">
+          <Key>
+            <PropertyRef Name="IDTPSOPERATEUR" />
+          </Key>
+          <Property Name="IDTPSOPERATEUR" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CENTREOUOPERATEURECONOMIQUE" Type="varchar" MaxLength="1" />
+          <Property Name="NOMOURAISONSOCIALEOPERATEUR" Type="varchar" MaxLength="255" />
+          <Property Name="NOMUTILISATEUR" Type="varchar" MaxLength="255" />
+          <Property Name="PRENOMUTILISATEUR" Type="varchar" MaxLength="255" />
+          <Property Name="ADRESSEUTILISATEUR" Type="varchar" MaxLength="255" />
+          <Property Name="TELUTILISATEUR" Type="varchar" MaxLength="100" />
+          <Property Name="MOBILEUTILISATEUR" Type="varchar" MaxLength="100" />
+          <Property Name="EMAILUTILISATEUR" Type="varchar" MaxLength="255" />
+          <Property Name="NUMEROINSCRIPTIONABONNE" Type="varchar" MaxLength="50" />
+          <Property Name="LOGINOPERATEUR" Type="varchar" MaxLength="100" />
+          <Property Name="MOTDEPASSEOPERATEUR" Type="varchar" MaxLength="50" />
+          <Property Name="ABONNE" Type="varchar" MaxLength="7" />
+          <Property Name="AbonneSMS" Type="char" MaxLength="10" />
+          <Property Name="DEFAULTPASSWORD" Type="char" MaxLength="1" />
+          <Property Name="DATEMODIFICATIONPWD" Type="datetime" />
+          <Property Name="DATEEXPIRATIONCERTIFICAT" Type="datetime" />
+          <Property Name="DELEGATIONIDAGENT" Type="varchar" MaxLength="30" />
+          <Property Name="SIGNATUREKEYIDAGENT" Type="varchar" MaxLength="30" />
+          <Property Name="EnrolerOuiNon" Type="char" MaxLength="1" />
+          <Property Name="DATECREATION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PAYS">
+          <Key>
+            <PropertyRef Name="CODE_PAYS" />
+          </Key>
+          <Property Name="CODE_PAYS" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="NOM_PAYS" Type="char" MaxLength="35" Nullable="false" />
+          <Property Name="INDICATIF" Type="char" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="TARIFDOUANE">
+          <Key>
+            <PropertyRef Name="NUMEROTARIFDOUANE" />
+          </Key>
+          <Property Name="NUMEROTARIFDOUANE" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="LIBELLETARIFDOUANE" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="APPLICATIONSModelStoreContainer">
+          <EntitySet Name="ANA_ENTREPRISES" EntityType="Self.ANA_ENTREPRISES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANA_UTILISATEURS" EntityType="Self.ANA_UTILISATEURS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEVISE" EntityType="Self.DEVISE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OPERATEUR" EntityType="Self.OPERATEUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYS" EntityType="Self.PAYS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TARIFDOUANE" EntityType="Self.TARIFDOUANE" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APPLICATIONSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANA_ENTREPRISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdOrbus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="NomouRaisonSociale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="TypeEntreprise" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Etat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DateInscription" Type="DateTime" Precision="0" />
+          <Property Name="DateExpiration" Type="DateTime" Precision="0" />
+          <Property Name="LibelleTypeEntreprise" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ANA_UTILISATEURS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Profil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="IdEntreprise" Type="Int32" Nullable="false" />
+          <Property Name="Etat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Signature" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="APPLICATIONSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANA_ENTREPRISES" EntityType="Self.ANA_ENTREPRISES" />
+          <EntitySet Name="ANA_UTILISATEURS" EntityType="Self.ANA_UTILISATEURS" />
+          <EntitySet Name="PAYS" EntityType="APPLICATIONSModel.PAYS" />
+          <EntitySet Name="TARIFDOUANE" EntityType="APPLICATIONSModel.TARIFDOUANE" />
+          <EntitySet Name="CLIENTS" EntityType="APPLICATIONSModel.CLIENTS" />
+          <EntitySet Name="DEVISE" EntityType="APPLICATIONSModel.DEVISE" />
+          <EntitySet Name="OPERATEUR" EntityType="APPLICATIONSModel.OPERATEUR" />
+        </EntityContainer>
+        <EntityType Name="PAYS">
+          <Key>
+            <PropertyRef Name="CODE_PAYS" />
+          </Key>
+          <Property Name="CODE_PAYS" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="NOM_PAYS" Type="String" Nullable="false" MaxLength="35" FixedLength="true" Unicode="false" />
+          <Property Name="INDICATIF" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TARIFDOUANE">
+          <Key>
+            <PropertyRef Name="NUMEROTARIFDOUANE" />
+          </Key>
+          <Property Name="NUMEROTARIFDOUANE" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="LIBELLETARIFDOUANE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="IDCLIENT" />
+          </Key>
+          <Property Name="IDCLIENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMOURAISONSOCIALEBENEFICIAIRE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="FONCTIONBENEFICIAIRE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="PROFESSIONBENEFICIAIRE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="ADRESSEBENEFICIAIRE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TELEPHONEBENEFICIAIRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FAXBENEFICIAIRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EMAILBENEFICIAIRE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="VILLEETATZIPBENEFICIAIRE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="PAYSBENEFICIAIRE" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERONINEA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NUMEROCQIE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NUMEROCC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERORC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BENEFICIAIRE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CODEPPM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATEAJOUT" Type="DateTime" Precision="3" />
+          <Property Name="USERCREATEDDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DEVISE">
+          <Key>
+            <PropertyRef Name="CODEDEVISE" />
+          </Key>
+          <Property Name="CODEDEVISE" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="NOMDEVISE" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="TAUXDEVISE" Type="Double" />
+          <Property Name="TAUXDEVISE1" Type="Double" />
+        </EntityType>
+        <EntityType Name="OPERATEUR">
+          <Key>
+            <PropertyRef Name="IDTPSOPERATEUR" />
+          </Key>
+          <Property Name="IDTPSOPERATEUR" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CENTREOUOPERATEURECONOMIQUE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="NOMOURAISONSOCIALEOPERATEUR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NOMUTILISATEUR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOMUTILISATEUR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ADRESSEUTILISATEUR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TELUTILISATEUR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILEUTILISATEUR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAILUTILISATEUR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NUMEROINSCRIPTIONABONNE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOGINOPERATEUR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MOTDEPASSEOPERATEUR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ABONNE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="AbonneSMS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DEFAULTPASSWORD" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DATEMODIFICATIONPWD" Type="DateTime" Precision="3" />
+          <Property Name="DATEEXPIRATIONCERTIFICAT" Type="DateTime" Precision="3" />
+          <Property Name="DELEGATIONIDAGENT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SIGNATUREKEYIDAGENT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EnrolerOuiNon" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DATECREATION" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APPLICATIONSModelStoreContainer" CdmEntityContainer="APPLICATIONSEntities">
+          <EntitySetMapping Name="ANA_ENTREPRISES">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.ANA_ENTREPRISES">
+              <MappingFragment StoreEntitySet="ANA_ENTREPRISES">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdOrbus" ColumnName="IdOrbus" />
+                <ScalarProperty Name="NomouRaisonSociale" ColumnName="NomouRaisonSociale" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="TypeEntreprise" ColumnName="TypeEntreprise" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="DateInscription" ColumnName="DateInscription" />
+                <ScalarProperty Name="DateExpiration" ColumnName="DateExpiration" />
+                <ScalarProperty Name="LibelleTypeEntreprise" ColumnName="LibelleTypeEntreprise" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANA_UTILISATEURS">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.ANA_UTILISATEURS">
+              <MappingFragment StoreEntitySet="ANA_UTILISATEURS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userLogin" ColumnName="userLogin" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Profil" ColumnName="Profil" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="IdEntreprise" ColumnName="IdEntreprise" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYS">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.PAYS">
+              <MappingFragment StoreEntitySet="PAYS">
+                <ScalarProperty Name="INDICATIF" ColumnName="INDICATIF" />
+                <ScalarProperty Name="NOM_PAYS" ColumnName="NOM_PAYS" />
+                <ScalarProperty Name="CODE_PAYS" ColumnName="CODE_PAYS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TARIFDOUANE">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.TARIFDOUANE">
+              <MappingFragment StoreEntitySet="TARIFDOUANE">
+                <ScalarProperty Name="LIBELLETARIFDOUANE" ColumnName="LIBELLETARIFDOUANE" />
+                <ScalarProperty Name="NUMEROTARIFDOUANE" ColumnName="NUMEROTARIFDOUANE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTS">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.CLIENTS">
+              <MappingFragment StoreEntitySet="CLIENTS">
+                <ScalarProperty Name="USERCREATEDDATE" ColumnName="USERCREATEDDATE" />
+                <ScalarProperty Name="DATEAJOUT" ColumnName="DATEAJOUT" />
+                <ScalarProperty Name="CODEPPM" ColumnName="CODEPPM" />
+                <ScalarProperty Name="BENEFICIAIRE" ColumnName="BENEFICIAIRE" />
+                <ScalarProperty Name="NUMERORC" ColumnName="NUMERORC" />
+                <ScalarProperty Name="NUMEROCC" ColumnName="NUMEROCC" />
+                <ScalarProperty Name="NUMEROCQIE" ColumnName="NUMEROCQIE" />
+                <ScalarProperty Name="NUMERONINEA" ColumnName="NUMERONINEA" />
+                <ScalarProperty Name="PAYSBENEFICIAIRE" ColumnName="PAYSBENEFICIAIRE" />
+                <ScalarProperty Name="VILLEETATZIPBENEFICIAIRE" ColumnName="VILLEETATZIPBENEFICIAIRE" />
+                <ScalarProperty Name="EMAILBENEFICIAIRE" ColumnName="EMAILBENEFICIAIRE" />
+                <ScalarProperty Name="FAXBENEFICIAIRE" ColumnName="FAXBENEFICIAIRE" />
+                <ScalarProperty Name="TELEPHONEBENEFICIAIRE" ColumnName="TELEPHONEBENEFICIAIRE" />
+                <ScalarProperty Name="ADRESSEBENEFICIAIRE" ColumnName="ADRESSEBENEFICIAIRE" />
+                <ScalarProperty Name="PROFESSIONBENEFICIAIRE" ColumnName="PROFESSIONBENEFICIAIRE" />
+                <ScalarProperty Name="FONCTIONBENEFICIAIRE" ColumnName="FONCTIONBENEFICIAIRE" />
+                <ScalarProperty Name="NOMOURAISONSOCIALEBENEFICIAIRE" ColumnName="NOMOURAISONSOCIALEBENEFICIAIRE" />
+                <ScalarProperty Name="IDCLIENT" ColumnName="IDCLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEVISE">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.DEVISE">
+              <MappingFragment StoreEntitySet="DEVISE">
+                <ScalarProperty Name="TAUXDEVISE1" ColumnName="TAUXDEVISE1" />
+                <ScalarProperty Name="TAUXDEVISE" ColumnName="TAUXDEVISE" />
+                <ScalarProperty Name="NOMDEVISE" ColumnName="NOMDEVISE" />
+                <ScalarProperty Name="CODEDEVISE" ColumnName="CODEDEVISE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OPERATEUR">
+            <EntityTypeMapping TypeName="APPLICATIONSModel.OPERATEUR">
+              <MappingFragment StoreEntitySet="OPERATEUR">
+                <ScalarProperty Name="DATECREATION" ColumnName="DATECREATION" />
+                <ScalarProperty Name="EnrolerOuiNon" ColumnName="EnrolerOuiNon" />
+                <ScalarProperty Name="SIGNATUREKEYIDAGENT" ColumnName="SIGNATUREKEYIDAGENT" />
+                <ScalarProperty Name="DELEGATIONIDAGENT" ColumnName="DELEGATIONIDAGENT" />
+                <ScalarProperty Name="DATEEXPIRATIONCERTIFICAT" ColumnName="DATEEXPIRATIONCERTIFICAT" />
+                <ScalarProperty Name="DATEMODIFICATIONPWD" ColumnName="DATEMODIFICATIONPWD" />
+                <ScalarProperty Name="DEFAULTPASSWORD" ColumnName="DEFAULTPASSWORD" />
+                <ScalarProperty Name="AbonneSMS" ColumnName="AbonneSMS" />
+                <ScalarProperty Name="ABONNE" ColumnName="ABONNE" />
+                <ScalarProperty Name="MOTDEPASSEOPERATEUR" ColumnName="MOTDEPASSEOPERATEUR" />
+                <ScalarProperty Name="LOGINOPERATEUR" ColumnName="LOGINOPERATEUR" />
+                <ScalarProperty Name="NUMEROINSCRIPTIONABONNE" ColumnName="NUMEROINSCRIPTIONABONNE" />
+                <ScalarProperty Name="EMAILUTILISATEUR" ColumnName="EMAILUTILISATEUR" />
+                <ScalarProperty Name="MOBILEUTILISATEUR" ColumnName="MOBILEUTILISATEUR" />
+                <ScalarProperty Name="TELUTILISATEUR" ColumnName="TELUTILISATEUR" />
+                <ScalarProperty Name="ADRESSEUTILISATEUR" ColumnName="ADRESSEUTILISATEUR" />
+                <ScalarProperty Name="PRENOMUTILISATEUR" ColumnName="PRENOMUTILISATEUR" />
+                <ScalarProperty Name="NOMUTILISATEUR" ColumnName="NOMUTILISATEUR" />
+                <ScalarProperty Name="NOMOURAISONSOCIALEOPERATEUR" ColumnName="NOMOURAISONSOCIALEOPERATEUR" />
+                <ScalarProperty Name="CENTREOUOPERATEURECONOMIQUE" ColumnName="CENTREOUOPERATEURECONOMIQUE" />
+                <ScalarProperty Name="IDTPSOPERATEUR" ColumnName="IDTPSOPERATEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
