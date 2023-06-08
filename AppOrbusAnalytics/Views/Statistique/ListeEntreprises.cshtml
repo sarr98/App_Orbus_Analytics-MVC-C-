@@ -1,0 +1,115 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<AppOrbusAnalytics.Models.ANA_ENTREPRISES>
+
+@{
+    ViewBag.Title = "ListeEntreprises";
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" type="text/css" />
+
+}
+
+
+<!-- Pop-up -->
+@using (Html.BeginForm("AjouterEntreprise", "Statistique", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="entreprise-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Nouvel Entreprise</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.TextBox("IdOrbus", "", new { @class = "form-control", @placeholder = "Id Orbus Ou Code PPM", @required = "required", @maxlength = "5" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBox("txtAdresse", "", new { @class = "form-control", @placeholder = "Adresse", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBox("txtTelephone", "", new { @class = "form-control", @placeholder = "Telephone", @required = "required", @RegularExpression = @"\(\d{3}\)\s\d{3}-\d{4}" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("TypeEntreprise", new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "ADM", Value = "ADM" },
+                            new SelectListItem { Text = "CAD", Value = "CAD" },
+                            new SelectListItem { Text = "BNQ", Value = "BNQ" },
+                            new SelectListItem { Text = "ORBUS", Value = "ORBUS" }
+                        }, "Sélectionnez un type d'entreprise", new { @class = "form-control", @required = "required" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default mr-2" data-dismiss="modal">Fermer</button>
+                    <button type="submit" formaction="@Url.Action("AjouterEntreprise", "Statistique")" formmethod="post" id="btnAjouter" class="btn btn-primary">
+                        Soumettre
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--FORMULAIRE -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <br />
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des Entreprises :  </h4>
+                        <br />
+                        <div class="table-responsive">
+                            <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr class="colone-titre">
+                                        <th class="hidden"></th>
+                                        <th>IdOrbus</th>
+                                        <th>Nom Entreprise</th>
+                                        <th>Adresse</th>
+                                        <th>Telephone</th>
+                                        <th>Date D'inscription</th>
+                                        <th>Date D'expiration</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var entreprise in Model)
+                                    {
+                                        <tr>
+                                            <td class="hidden"></td>
+                                            <td>@entreprise.IdOrbus</td>
+                                            <td>@entreprise.NomouRaisonSociale</td>
+                                            <td>@entreprise.Adresse</td>
+                                            <td>@entreprise.Telephone</td>
+                                            <td>@entreprise.DateInscription</td>
+                                            <td>@entreprise.DateExpiration</td>
+                                            <td><a href="@Url.Action("DetailsEntreprise", "Statistique",new { id = entreprise.id })"><i class="material-icons">info</i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button type="button" class="btn btn-fill btn-rose" data-toggle="modal" data-target="#entreprise-dialog">Nouvel Entreprise</button>
+                            </div>
+                            <br />
+                        </div>
+                        <div>
+                            <br />
+                        </div>
+                        <div>
+                            @Html.PagedListPager(Model, page => Url.Action("ListeEntreprises", new { page }), new PagedListRenderOptions { DisplayPageCountAndCurrentLocation = true })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

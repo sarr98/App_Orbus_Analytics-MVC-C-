@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace AppOrbusAnalytics.Models
+{
+    public class Dal
+    {
+        APPLICATIONSEntities db = new APPLICATIONSEntities();
+
+
+        public List<ANA_ENTREPRISES> GetListeEntreprises()
+        {
+            try
+            {
+                List<ANA_ENTREPRISES> listeEntreprises = db.ANA_ENTREPRISES.ToList();
+
+                return listeEntreprises;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public ANA_ENTREPRISES GetEntrepriseById(int id)
+        {
+            try
+            {
+                ANA_ENTREPRISES entreprise = db.ANA_ENTREPRISES.Where(u => u.id == id).FirstOrDefault();
+
+                return entreprise;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public List<ANA_UTILISATEURS> GetListeUtlisateurs()
+        {
+            try
+            {
+                List<ANA_UTILISATEURS> listeUtlisateurs = db.ANA_UTILISATEURS.ToList();
+
+                return listeUtlisateurs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public ANA_UTILISATEURS GetUtlisateurById(int id)
+        {
+            try
+            {
+                ANA_UTILISATEURS Utlisateur = db.ANA_UTILISATEURS.Where(u => u.id == id).FirstOrDefault();
+
+                return Utlisateur;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+        public ANA_UTILISATEURS AddUser(ANA_UTILISATEURS user)
+        {
+            try
+            {
+                ANA_UTILISATEURS useradd = db.ANA_UTILISATEURS.Add(user);
+
+                return useradd;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+
+
+    }
+}

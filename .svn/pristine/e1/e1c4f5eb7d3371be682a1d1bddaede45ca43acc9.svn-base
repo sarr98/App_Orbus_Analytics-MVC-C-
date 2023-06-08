@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "ListeEntreprises";
+}
+
+<!--FORMULAIRE -->
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <br />
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des Entreprises :  </h4>
+                        <br />
+                        <div class="table-responsive">
+                            <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr class="colone-titre">
+                                        <th class="hidden"></th>
+                                        <th>IdOrbus</th>
+                                        <th>Nom Entreprise</th>
+                                        <th>Adresse</th>
+                                        <th>Telephone</th>
+                                        <th>Date D'inscription</th>
+                                        <th>Date D'expiration</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var entreprise in Model)
+                                    {
+                                    <tr>
+                                        <td class="hidden"></td>
+                                        <td>@entreprise.IdOrbus</td>
+                                        <td>@entreprise.NomouRaisonSociale</td>
+                                        <td>@entreprise.Adresse</td>
+                                        <td>@entreprise.Telephone</td>
+                                        <td>@entreprise.DateInscription</td>
+                                        <td>@entreprise.DateExpiration</td>
+                                        <td><a href="@Url.Action("Details", "Entreprises", new { id = entreprise.id })"><i class="material-icons">info</i></a></td>
+                                    </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+
+                            <br />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+

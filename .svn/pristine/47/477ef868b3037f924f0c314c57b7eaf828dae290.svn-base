@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Inscription";
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+}
+
+
+<body class="p-3 p-md-4 p-xl-5">
+    <div class="container">
+        <div class="card border-light-subtle shadow-sm">
+            <div class="row g-0">
+                <div class="col-12 col-md-6 text-bg-primary">
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <div class="col-10 col-xl-8 py-3">
+                            <img class="img-fluid rounded mb-4" loading="lazy" src="https://www.gainde2000.com/wp-content/uploads/2017/11/logo_Gainde.png" width="245" height="80" alt="">
+                            <hr class="border-primary-subtle mb-4">
+                            <h2 class="h1 mb-4">We make digital products that drive you to stand out.</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card-body p-3 p-md-4 p-xl-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-5">
+                                    <h3>Page d'Inscription </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="#!">
+                            <div class="row gy-3 gy-md-4 overflow-hidden">
+                                <div class="col-md-6">
+                                    <label for="prenom" class="form-label">Prenom <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="prenom" id="prenom" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nom" id="nom" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="password" class="form-label">Confirmer Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="role" id="role">
+                                        <option value="admin">Superviseur</option>
+                                        <option value="moderator">Agent</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg py-xl-3" type="submit">Soumettre</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

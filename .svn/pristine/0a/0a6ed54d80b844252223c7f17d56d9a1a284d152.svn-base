@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace AppOrbusAnalytics.Controllers
+{
+    public class StatistiqueController : Controller
+    {
+        // GET: Statistique
+        public ActionResult Accueil()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierProfilUtilisateur()
+        {
+            return View();
+        }
+
+        public ActionResult Inscription()
+        {
+            return View();
+        }
+
+        public ActionResult ListeEntreprises()
+        {
+            return View();
+        }
+
+        public ActionResult ListeUtilisateurs()
+        {
+            return View();
+        }
+
+        public ActionResult Valeur()
+        {
+            return View();
+        }
+
+        public ActionResult Volumetrie()
+        {
+            return View();
+        }
+
+        public ActionResult Quantites()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobales()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobalesQuantite()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobalesProd()
+        {
+            return View();
+        }
+
+        public ActionResult Guide()
+        {
+            return View();
+        }
+
+
+
+    }
+}

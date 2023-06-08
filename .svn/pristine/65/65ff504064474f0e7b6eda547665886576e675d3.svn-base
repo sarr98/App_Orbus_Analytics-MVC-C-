@@ -1,0 +1,119 @@
+﻿@model AppOrbusAnalytics.Models.ANA_ENTREPRISES
+
+@{
+    ViewBag.Title = "DetailsEntreprise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 d-flex">
+                <div class="card">
+                    <div class="card-header  card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">business</i>
+                        </div>
+
+                        <h3 class="card-title f1" style="text-align:center"><b>Details de l'Entreprise</b></h3>
+                    </div>
+                    <br />
+                    <div class="card-body">
+
+
+                        @using (Html.BeginForm("DetailsEntreprise", "Statistique", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+
+
+                            @Html.HiddenFor(m => m.id)
+                          
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.IdOrbus, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.IdOrbus, null, new { @class = "form-control", @placeholder = "Id Orbus Ou Code PPM", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.NomouRaisonSociale, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.NomouRaisonSociale, null, new { @class = "form-control", @placeholder = "Nom Entreprise", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Adresse, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.Adresse, null, new { @class = "form-control", @placeholder = "Adresse Entreprise" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Telephone, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.Telephone, null, new { @class = "form-control", @placeholder = "Telephone" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.TypeEntreprise, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.TypeEntreprise, null, new { @class = "form-control", @placeholder = "Type Entreprise", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.LibelleTypeEntreprise, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.LibelleTypeEntreprise, null, new { @class = "form-control", @placeholder = "Libelle Type Entreprise", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.DateInscription, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.DateInscription, null, new { @class = "form-control", @placeholder = "Date Inscription", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.DateExpiration, new { @class = "control-label" })
+                                        @Html.TextBoxFor(m => m.DateExpiration, null, new { @class = "form-control", @placeholder = "Date Expiration", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+                            <div>
+                                <!-- button -->
+                                <div class="movebtn">
+                                    <button class="btn btn-fill btn-rose" type="submit" formaction="@Url.Action("DetailsEntreprise", "Statistique")" formmethod="post">Mettre a jour</button>
+
+                                </div>
+                                <br />
+                                <br />
+                            </div>
+
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

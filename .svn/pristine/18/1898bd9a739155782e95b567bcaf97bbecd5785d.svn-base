@@ -1,0 +1,251 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace AppOrbusAnalytics.Models
+{
+    public class Dal
+    {
+        APPLICATIONSEntities db = new APPLICATIONSEntities();
+
+       
+        public List<ANA_ENTREPRISES> GetListeEntreprises()
+        {
+            try
+            {
+                List<ANA_ENTREPRISES> listeEntreprises = db.ANA_ENTREPRISES.ToList();
+
+                return listeEntreprises;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public ANA_ENTREPRISES GetEntrepriseById(int id)
+        {
+            try
+            {
+                ANA_ENTREPRISES entreprise = db.ANA_ENTREPRISES.Where(u => u.id == id).FirstOrDefault();
+
+                return entreprise;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public bool UpdateUtilisateur(ANA_UTILISATEURS utilisateur) {
+            try
+            {
+                ANA_UTILISATEURS utilisateurUpd = db.ANA_UTILISATEURS.Where(u => u.id == utilisateur.id).FirstOrDefault();
+                if (utilisateurUpd == null)
+                    throw new Exception();
+
+                utilisateurUpd.userLogin = utilisateur.userLogin;
+                utilisateurUpd.Nom = utilisateur.Nom;
+                utilisateurUpd.Prenom = utilisateur.Prenom;
+                utilisateurUpd.Email = utilisateur.Email;
+                utilisateurUpd.Telephone = utilisateur.Telephone;
+                db.Entry(utilisateurUpd).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+    
+        public bool UpdateEntreprise(ANA_ENTREPRISES entreprise)
+        {
+            try
+            {
+                ANA_ENTREPRISES entrepriseUpd = db.ANA_ENTREPRISES.Where(u => u.id == entreprise.id).FirstOrDefault();
+                if (entrepriseUpd == null)
+                    throw new Exception();
+
+                entrepriseUpd.Adresse = entreprise.Adresse;
+                entrepriseUpd.Telephone = entreprise.Telephone;
+
+                db.Entry(entrepriseUpd).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public List<ANA_UTILISATEURS> GetListeUtlisateurs()
+        {
+            try
+            {
+                List<ANA_UTILISATEURS> listeUtlisateurs = db.ANA_UTILISATEURS.ToList();
+
+                return listeUtlisateurs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public ANA_UTILISATEURS GetUtlisateurById(int id)
+        {
+            try
+            {
+                ANA_UTILISATEURS Utlisateur = db.ANA_UTILISATEURS.Where(u => u.id == id).FirstOrDefault();
+
+                return Utlisateur;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+        public ANA_UTILISATEURS AddUser(ANA_UTILISATEURS user)
+        {
+            try
+            {
+                ANA_UTILISATEURS useradd = db.ANA_UTILISATEURS.Add(user);
+                db.SaveChanges();
+                return useradd;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public ANA_ENTREPRISES AddEntreprise(ANA_ENTREPRISES entreprise)
+        {
+            try
+            {
+                ANA_ENTREPRISES entrepriseadd = db.ANA_ENTREPRISES.Add(entreprise);
+                db.SaveChanges();
+                return entrepriseadd;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message); 
+                return null;
+            }
+
+        }
+
+        public List<PAYS> GetPays()
+        {
+            try
+            {
+                List<PAYS> listePays = db.PAYS.ToList();
+                return listePays;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<TARIFDOUANE> GetTarifsDouane()
+        {
+            try
+            {
+                List<TARIFDOUANE> listeTarifsDouane = db.TARIFDOUANE
+                  .Select(t => new TARIFDOUANE { NUMEROTARIFDOUANE = t.NUMEROTARIFDOUANE, LIBELLETARIFDOUANE = t.LIBELLETARIFDOUANE })
+                  .OrderBy(t => t.LIBELLETARIFDOUANE)
+                  .ToList();
+                return listeTarifsDouane;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<DEVISE> GetDevises()
+        {
+            try
+            {
+                List<DEVISE> listDevise = db.DEVISE.Where(d => d.NOMDEVISE != "")
+                .OrderBy(d => d.NOMDEVISE)
+                .Select(d => new DEVISE { CODEDEVISE = d.CODEDEVISE, NOMDEVISE = d.NOMDEVISE })
+                .ToList();
+                return listDevise;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public decimal ConvertirEnDevise(decimal valeur, string codeDevise)
+        {
+            try
+            {
+                var tauxDevise = db.DEVISE
+                    .Where(d => d.CODEDEVISE == codeDevise && d.TAUXDEVISE != null)
+                    .Select(d => d.TAUXDEVISE)
+                    .FirstOrDefault();
+
+                if (tauxDevise != null)
+                {
+                    if (tauxDevise != 1)
+                    {
+                        valeur = valeur * (decimal)tauxDevise;
+                    }
+                    else
+                    {
+                        valeur = valeur / (decimal)tauxDevise;
+                    }
+                }
+
+                return valeur;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+
+        
+        public List<Resultat> GetData(DateTime startDate, DateTime endDate)
+        {
+
+            string query = @" SELECT SUM(fa.VALEURTOTALECFA) AS Total,
+                       FORMAT(do.DATEDOSSIERTPS, 'dd/MM/yyyy') AS Chiffres,
+                       DATENAME(WEEKDAY, do.DATEDOSSIERTPS) AS Lettres,
+                       DATEPART(month, do.DATEDOSSIERTPS) AS Mois,
+                       DATEPART(WEEKDAY, do.DATEDOSSIERTPS) AS Jour
+                FROM FACTURE fa
+                INNER JOIN DOSSIERTPS do ON do.NUMERODOSSIERTPS = fa.NUMERODOSSIERTPS
+                WHERE do.DATEDOSSIERTPS >= '2020-01-01'
+                  AND do.DATEDOSSIERTPS <= '2020-02-02'
+                  AND EXISTS (SELECT 1 FROM JOINDRE_16 jo WHERE jo.NUMERODOSSIERTPS = do.NUMERODOSSIERTPS)
+                GROUP BY DATEPART(WEEKDAY, do.DATEDOSSIERTPS),
+                         FORMAT(do.DATEDOSSIERTPS, 'dd/MM/yyyy'),
+                         DATEPART(month, do.DATEDOSSIERTPS),
+                         DATENAME(WEEKDAY, do.DATEDOSSIERTPS)
+                ORDER BY Jour, Mois, Chiffres ASC";
+
+            var getData = db.Database.SqlQuery<Resultat>(query).ToList();
+             
+            return getData;
+        }
+
+    }
+}

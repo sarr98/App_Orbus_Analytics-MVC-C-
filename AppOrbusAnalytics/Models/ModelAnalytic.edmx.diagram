@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3331678f7984e84a07bdf132b0aacde" Name="Diagram1">
+        <EntityTypeShape EntityType="APPLICATIONSModel.ANA_ENTREPRISES" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.ANA_UTILISATEURS" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.PAYS" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.TARIFDOUANE" Width="1.5" PointX="4.75" PointY="2.875" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.CLIENTS" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.DEVISE" Width="1.5" PointX="14.125" PointY="0.75" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.OPERATEUR" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.DOSSIERTPS" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.FACTURE" Width="1.5" PointX="8.5" PointY="0.75" />
+        <EntityTypeShape EntityType="APPLICATIONSModel.CONTENIR" Width="1.5" PointX="12.25" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

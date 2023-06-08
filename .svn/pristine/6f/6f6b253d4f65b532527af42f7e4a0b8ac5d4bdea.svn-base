@@ -1,0 +1,110 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<AppOrbusAnalytics.Models.ANA_ENTREPRISES>
+
+@{
+    ViewBag.Title = "ListeEntreprises";
+}
+
+
+<!-- Pop-up -->
+<div class="modal fade" id="entreprise-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Nouvel Entreprise</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulaire de création d'entreprise -->
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="IdOrbus" placeholder="Id Orbus Ou Code PPM">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Adresse" placeholder="Adresse">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Telephone" placeholder="Telephone">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="TypeEntreprise">
+                            <option value="1">Type D'entreprise</option>
+                            <option value="2">Entreprise 2</option>
+                            <option value="3">Entreprise 3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default mr-2" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary">Soumettre</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--FORMULAIRE -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <br />
+                    <br />
+                    <div class="card-body">
+                        <h4 class="card-title">Liste des Entreprises :  </h4>
+                        <br />
+                        <div class="table-responsive">
+                            <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr class="colone-titre">
+                                        <th class="hidden"></th>
+                                        <th>IdOrbus</th>
+                                        <th>Nom Entreprise</th>
+                                        <th>Adresse</th>
+                                        <th>Telephone</th>
+                                        <th>Date D'inscription</th>
+                                        <th>Date D'expiration</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var entreprise in Model)
+                                    {
+                                        <tr>
+                                            <td class="hidden"></td>
+                                            <td>@entreprise.IdOrbus</td>
+                                            <td>@entreprise.NomouRaisonSociale</td>
+                                            <td>@entreprise.Adresse</td>
+                                            <td>@entreprise.Telephone</td>
+                                            <td>@entreprise.DateInscription</td>
+                                            <td>@entreprise.DateExpiration</td>
+                                            <td><a href="@Url.Action("Details", "Entreprises", new { id = entreprise.id })"><i class="material-icons">info</i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button type="button" class="btn btn-fill btn-rose" data-toggle="modal" data-target="#entreprise-dialog">Nouvel Entreprise</button>
+                            </div>
+                            <br />
+                        </div>
+                        <div>
+                            <br />
+                        </div>
+                        <div>
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("ListeEntreprises", new { page }), new PagedListRenderOptions { DisplayPageCountAndCurrentLocation = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

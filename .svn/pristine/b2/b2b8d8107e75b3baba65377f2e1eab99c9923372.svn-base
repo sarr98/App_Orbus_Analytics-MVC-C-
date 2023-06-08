@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "ListeUtilisateurs";
+}
+
+<h2>ListeUtilisateurs</h2>
+

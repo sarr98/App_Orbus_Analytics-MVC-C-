@@ -1,0 +1,197 @@
+﻿using AppOrbusAnalytics.Models;
+using PagedList;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace AppOrbusAnalytics.Controllers
+{
+    public class StatistiqueController : Controller
+    {
+        Dal dal = new Dal();
+        // GET: Statistique
+        public ActionResult Accueil()
+        {
+            return View();
+        }
+
+        public ActionResult ModifierProfilUtilisateur(int id)
+        {
+
+            ANA_UTILISATEURS utilisateur = dal.GetUtlisateurById(id);
+
+            if (utilisateur == null)
+                utilisateur = new ANA_UTILISATEURS();
+
+            return View(utilisateur);
+        }
+        [HttpPost]
+        public ActionResult ModifierProfilUtilisateur(ANA_UTILISATEURS utilisateur)
+        {
+
+            bool utilisateurSaved = dal.UpdateUtilisateur(utilisateur);
+
+            if (!utilisateurSaved)
+                return View(utilisateur);
+
+            utilisateur = dal.GetUtlisateurById(utilisateur.id);
+
+            return View(utilisateur);
+        }
+
+        public ActionResult Inscription()
+        {
+            return View();
+        }
+
+        public ActionResult ListeEntreprises(int? page)
+        {
+            try
+            {
+                List<ANA_ENTREPRISES> listeEntreprises = dal.GetListeEntreprises()
+                    .OrderByDescending(u => u.DateInscription).ToList(); ;
+                int pageSize = 5; 
+                int pageNumber = (page ?? 1);
+                return View(listeEntreprises.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+        [HttpPost]
+        public ActionResult AjouterUtilisateur(string txtPrenom, string txtNom,string txtEmail, string txtLogin, string txtTelephone, string Profil)
+        {
+            try
+            {
+
+                ANA_UTILISATEURS users = new ANA_UTILISATEURS();
+                users.Prenom = txtPrenom;
+                users.Nom = txtNom;
+                users.Email = txtEmail;
+                users.userLogin = txtLogin;
+                users.Telephone = int.Parse(txtTelephone);
+                users.Profil = (Profil == "1") ? "Agent" : "Superviseur";
+                users.DateCreation = DateTime.Now;
+                users.Etat = "A";
+                users.IdEntreprise = 1;
+                users.Signature = "Test";
+                dal.AddUser(users);
+                return RedirectToAction("ListeUtilisateurs");
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AjouterEntreprise([Required] string IdOrbus, [Required] string txtAdresse,[Required] string txtTelephone, [Required] string TypeEntreprise)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ANA_ENTREPRISES entreprise = new ANA_ENTREPRISES();
+                    entreprise.IdOrbus = IdOrbus;
+                    entreprise.Adresse = txtAdresse;
+                    entreprise.Telephone = int.Parse(txtTelephone);
+                    entreprise.TypeEntreprise = TypeEntreprise;
+                    entreprise.NomouRaisonSociale = "test";
+                    entreprise.Etat = "A";
+                    entreprise.DateInscription = DateTime.Now;
+                    entreprise.DateExpiration = DateTime.Now;
+                    entreprise.LibelleTypeEntreprise = "test";
+                    dal.AddEntreprise(entreprise);
+                    return RedirectToAction("ListeEntreprises");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+
+        public ActionResult ListeUtilisateurs(int? page)
+        {
+            try
+            {
+                List<ANA_UTILISATEURS> listeUtilisateurs = dal.GetListeUtlisateurs()
+                    .OrderByDescending(u => u.DateCreation)
+                    .ToList();
+
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(listeUtilisateurs.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+        public ActionResult Valeur()
+        {
+            return View();
+        }
+
+        public ActionResult Volumetrie()
+        {
+            return View();
+        }
+
+        public ActionResult Quantites()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobales()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobalesQuantite()
+        {
+            return View();
+        }
+
+        public ActionResult StatsGlobalesProd()
+        {
+            return View();
+        }
+
+        public ActionResult Guide()
+        {
+            return View();
+        }
+        public ActionResult DetailsEntreprise(int id)
+        {
+            ANA_ENTREPRISES entreprise = dal.GetEntrepriseById(id);
+
+            if (entreprise == null)
+                entreprise = new ANA_ENTREPRISES();
+
+            return View(entreprise);
+        }
+
+        [HttpPost]
+        public ActionResult DetailsEntreprise(ANA_ENTREPRISES entreprise)
+        {
+
+            bool entrepriseSaved = dal.UpdateEntreprise(entreprise);
+
+            if (!entrepriseSaved)
+                return View(entreprise);
+
+            entreprise = dal.GetEntrepriseById(entreprise.id);
+
+            return View(entreprise);
+        }
+    }
+}

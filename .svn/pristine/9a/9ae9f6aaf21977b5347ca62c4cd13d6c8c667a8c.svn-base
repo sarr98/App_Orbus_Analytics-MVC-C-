@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Volumetrie";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 d-flex">
+
+                <div class="card">
+                    <div class="card-header  card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">search</i>
+                        </div>
+                        <h3 class="card-title f1" style="text-align:center"><b>Statistiques par  Volumétrie</b></h3>
+                        <h4 class="card-title f1"><b>Formulaire de Recherche</b></h4>
+                    </div>
+                    <br />
+
+
+                    <div class="card-body">
+                        <!-- Debut ligne 2  -->
+
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="form-group">
+                                            <select id="Drop_Operation_Rech" class="selectpicker taille " data-style="select-with-transition" title="Nature Opération" data-size="10" runat="server">
+                                                <option value="-1">Nature Opération</option>
+                                                <option value="1">Importation</option>
+                                                <option value="2">Exportation</option>
+                                                <option value="3">Transit</option>
+                                                <option value="4">Réexportation</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            @Html.TextBox("Produit", null, new { @class = "form-control", @placeholder = "Produit", data_toggle = "modal", data_target = "#produit-dialog" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-5 col-md-12">
+                                        <div class="form-group">
+                                            <select id="TypeDossierList" class="selectpicker taille " data-style="select-with-transition" data-size="10" runat="server">
+                                                <option value="0">Tous les dossiers</option>
+                                                <option value="1">Les dossiers domiciliés</option>
+                                                <option value="2">Les dossiers non domiciliés</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="form-group">
+                                            <select id="DateParList" dis class="selectpicker taille " data-style="select-with-transition" title="Date Par" data-size="10" runat="server">
+                                                <option value="1">Jour</option>
+                                                <option value="2">Mois</option>
+                                                <option value="3">Année</option>
+                                            </select>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="La périodicité est obligatoire." ControlToValidate="DateParList" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="date" id=" DebutPeriode" name="DebutPeriode" placeholder=" Début " />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5 col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="txtPaysProvenance" placeholder="Pays Provenance" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="form-group">
+                                            <select id="DeviseList" class="selectpicker taille " data-style="select-with-transition" title="Devise" data-size="10" runat="server" datatextfield="NOMDEVISE" datavaluefield="CODEDEVISE">
+
+                                                <option value="-1"></option>--%>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="date" id="Text_FinPeriode_Rech" name="Text_FinPeriode_Rech" placeholder="Fin" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5 col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="txtPaysOrigine" name="txtPaysOrigine" data-toggle="modal" data-target="#pays-dialog" placeholder="Pays Origine" />
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="form-group">
+                                            <select id="GroupageList" class="selectpicker taille " data-style="select-with-transition" title="Groupé par" data-size="10" runat="server">
+                                                <option value="1">Date</option>
+                                                <option value="2">Pays</option>
+                                                <option value="3">Bénéficiaire</option>
+                                            </select>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Le groupage est obligatoire." ControlToValidate="GroupageList" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="txtBeneficiaire" name="txtBeneficiaire" data-toggle="modal" data-target="#beneficiaire-dialog" placeholder="Bénéficiaire" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button class="btn btn-fill btn-rose" type="button" onclick="Rechercher_Click()">Rechercher</button>
+                                <input class="btn btn-fill btn-warning" type="button" onclick="VisualiserExcel_Click()" value="Exporter sous excel" />
+                                <input class="btn btn-fill form-btn" type="button" onclick="Annuler_Click()" value="Annuler" />
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

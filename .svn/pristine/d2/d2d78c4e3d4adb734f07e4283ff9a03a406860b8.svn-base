@@ -1,0 +1,291 @@
+﻿@using PagedList.Mvc
+@*@model List<AppOrbusAnalytics.Models.ResultatStatGloblalProd>*@
+@model PagedList.IPagedList<AppOrbusAnalytics.Models.ResultatStatGloblalProd>
+
+
+@{
+    /**/
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" type="text/css" />
+    ViewBag.Title = "StatsGlobalesProd";
+}
+<!--Pop Up produit-dialog Start -->
+<div class="modal fade" id="produit-dialog" tabindex="-1" role="dialog" aria-labelledby="produit-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Produit</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code Tarifaire" id="txtCodeProduit" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Description" id="txtDesignation" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse;" id="produitTable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Désignation</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" id="btnProdValider1" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Pop Up produit-dialog End  -->
+<!--Pop Up pays-dialog Start  -->
+<div class="modal fade" id="pays-dialog" tabindex="-1" role="dialog" aria-labelledby="pays-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <input type="hidden" id="txtTypePays" />
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Pays</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code" id="txtCodePays" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nom" id="txtNomPays" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse; max-width: 490px">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Nom</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Pop Up pays-dialog End  -->
+<!--Pop Up beneficiaire-dialog Start  -->
+<div class="modal fade" id="beneficiaire-dialog" tabindex="-1" role="dialog" aria-labelledby="beneficiaire-dialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="flex-direction: column; text-align: center; overflow: auto;">
+                <h3><b>Choisir Client</b></h3>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Code PPM" id="txtCodePPM" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Raison Sociale" id="txtNomBeneficiare" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table" style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>PPM</th>
+                                <th>Bénéficiaire</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProdCocherTout" class="btn btn-warning mr-2" data-dismiss="modal">Cocher Tout</button>
+                <button type="button" id="btnProdEffacer" class="btn btn-danger mr-2" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Pop Up beneficiaire-dialog End  -->
+<!--FORMULAIRE -->
+@using (Html.BeginForm("StatsGlobalesProd", "Statistique", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">search</i>
+                            </div>
+                            <h3 class="card-title f1" style="text-align: center"><b>Statistiques Globales par Produit</b></h3>
+                            <h4 class="card-title f1"><b>Formulaire de Recherche</b></h4>
+                        </div>
+                        <br />
+
+                        <!-- Debut ligne 2  -->
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select id="Drop_Operation_Rech" class="selectpicker taille" data-style="select-with-transition" title="Nature Opération" data-size="10" runat="server">
+                                            <option value="-1">Nature Opération</option>
+                                            <option value="1">Importation</option>
+                                            <option value="2">Exportation</option>
+                                            <option value="3">Transit</option>
+                                            <option value="4">Réexportation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Produit", null, new { @id = "Produit", @class = "form-control", @placeholder = "Produit", data_toggle = "modal", data_target = "#produit-dialog" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.TextBox("Beneficiaire", null, new { @class = "form-control", @placeholder = "Bénéficiaire", data_toggle = "modal", data_target = "#beneficiaire-dialog" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input class="form-control" type="date" id=" DebutPeriode" name="DebutPeriode" placeholder=" Début " />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input class="form-control" type="date" id="FinPeriode" name="FinPeriode" placeholder="Fin" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <!-- button -->
+                            <div class="movebtn">
+                                <button class="btn btn-fill btn-rose" type="submit" formaction="@Url.Action("StatsGlobalesProd", "Statistique")" formmethod="post"
+                                        id="btnRechercher" name="RechercherButton">
+                                    Rechercher
+                                </button>
+                                <input class="btn btn-fill btn-warning" type="button" onclick="VisualiserExcel_Click()" value="Exporter sous excel" />
+                                <input class="btn btn-fill form-btn" type="button" onclick="Annuler_Click()" value="Annuler" />
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    if (IsPost && Model != null && Request.Form["RechercherButton"] != null)
+        {
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <br />
+                                <br />
+                                <div class="card-body">
+                                    <h4 class="card-title">Total Orbus : <span style="font-weight: bold; color: red;">@Model.Sum(p => p.Total)</span></h4>
+                                    <br />
+                                    <div class="table-responsive">
+                                        <table id="ListeUsers" class="table" cellspacing="0" style="border-collapse:collapse;">
+                                            <thead>
+                                                <tr class="colone-titre">
+                                                    <th class="hidden"></th>
+                                                    <th><strong>Produit</strong></th>
+                                                    <th><strong>Dossier</strong></th>
+                                                    <th><strong>Clients</strong></th>
+                                                    <th><strong>Mesure</strong></th>
+                                                    <th><strong>Quantite</strong></th>
+                                                    <th><strong>Valeur</strong></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var produit in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td class="hidden"></td>
+                                                        <td>@produit.Produit</td>
+                                                        <td>@produit.Dossier</td>
+                                                        <td>@produit.Client</td>
+                                                        <td>@produit.Mesure</td>
+                                                        <td>@produit.Quantite</td>
+                                                        <td style="color: green; font-weight: bold;">@produit.Total</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+
+                                        <br />
+                                    </div>
+                                    <div>
+                                        @Html.PagedListPager(Model, page => Url.Action("StatsGlobalesProd", new { page }), new PagedListRenderOptions { DisplayPageCountAndCurrentLocation = true })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+@section scripts {
+    <script src="@Url.Content("~/Scripts/produit-dialog.js")"></script>
+    <script type="text/javascript">
+    </script>
+}
+
